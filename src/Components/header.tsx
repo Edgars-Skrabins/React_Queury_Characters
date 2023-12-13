@@ -1,58 +1,57 @@
-import {HeaderProps} from "../App.tsx";
-import {useRef,} from "react";
 
-const homeMenuName: string = "home";
-const charactersMenuName: string = "characters";
-const aboutMenuName: string = "about";
+import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
+import {Home} from "./home.tsx";
+import {Characters} from "./characters.tsx";
+import {About} from "./about.tsx";
 
-export const Header = ({onButtonClick}: HeaderProps) => {
+export const Header = () => {
 
-    const homeBtn = useRef<HTMLButtonElement>(null);
-    const charactersBtn = useRef<HTMLButtonElement>(null);
-    const aboutBtn = useRef<HTMLButtonElement>(null);
-
-    const clearBtnSelectionClasses = () => {
-
-        if(homeBtn.current) homeBtn.current.classList.remove("button-selected");
-        if(charactersBtn.current) charactersBtn.current.classList.remove("button-selected");
-        if(aboutBtn.current) aboutBtn.current.classList.remove("button-selected");
+    const clearSelectedStyles = () => {
+        const elements = document.querySelectorAll('.selected');
+        elements.forEach((e) => {
+            e.classList.remove("selected");
+        })
     }
 
     return (
-        <div className="header">
+        <Router>
+            <nav>
+                <ul className="header">
+                    <li>
+                        <Link
+                            to="/home"
+                            onClick={(e) => {
+                                clearSelectedStyles();
+                                e.currentTarget.classList.add("selected");
+                            }}
+                        >Home</Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/characters"
+                            onClick={(e) => {
+                                clearSelectedStyles();
+                                e.currentTarget.classList.add("selected");
+                            }}
+                        >Characters</Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/about"
+                            onClick={(e) => {
+                                clearSelectedStyles();
+                                e.currentTarget.classList.add("selected");
+                            }}
+                        >About</Link>
+                    </li>
+                </ul>
+            </nav>
 
-            <button
-                ref={homeBtn}
-                onClick={
-                    () => {
-                        onButtonClick(homeMenuName);
-                        clearBtnSelectionClasses();
-                        homeBtn.current && homeBtn.current.classList.add("button-selected");
-                    }
-                }
-            >Home
-            </button>
-
-            <button
-                ref={charactersBtn}
-                onClick={() => {
-                    onButtonClick(charactersMenuName);
-                    clearBtnSelectionClasses();
-                    charactersBtn.current && charactersBtn.current.classList.add("button-selected")
-                }}
-            >Characters
-            </button>
-
-            <button
-                ref={aboutBtn}
-                onClick={() => {
-                    onButtonClick(aboutMenuName);
-                    clearBtnSelectionClasses();
-                    aboutBtn.current && aboutBtn.current.classList.add("button-selected")
-                }
-            }
-            >About
-            </button>
-        </div>
+            <Routes>
+                <Route path="/home" element={<Home />} />
+                <Route path="/characters" element={<Characters />} />
+                <Route path="/about" element={<About />} />
+            </Routes>
+        </Router>
     )
 }

@@ -9,6 +9,10 @@
     gap: 2rem;
 }
 
+.header__link{
+
+}
+
 .home{
     display: flex;
     flex-direction: column;
@@ -117,7 +121,7 @@
     font-size: 1.2rem;
 }
 
-.button-selected{
+.selected{
     border-color: #313131;
 
     color: #313131;

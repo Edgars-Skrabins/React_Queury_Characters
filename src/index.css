@@ -3,10 +3,37 @@
 }
 
 a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+    padding: 0.6rem 1.2rem;
+
+    font-size: 2rem;
+    background: none;
+    border-style: solid;
+    border-width: 0;
+    border-bottom-width: 0.12rem;
+
+    transition: 0.1s;
+
+    &:hover{
+        cursor: pointer;
+        border-color: #606060;
+
+        color: #606060;
+    }
+}
+a:hover{
 
 }
+
 a:hover {
 
+}
+
+ul{
+    list-style-type: none;
 }
 
 body {
